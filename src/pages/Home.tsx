@@ -4,15 +4,15 @@ import axios from "axios";
 
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [url, setUrl] = useState<string>("");
-  const [countries, setCountries] = useState<object[]>([]);
-  const [region, setRegion] = useState<string>("all");
+  const [countries, setCountries] = useState([]);
+  // const [region, setRegion] = useState<string>("all");
 
   useEffect(() => {
-    const url: string =
-      region === "all"
-        ? "https://restcountries.com/v3.1/all"
-        : `https://restcountries.com/v3.1/region/${region}`;
+    // const url: string =
+    //   region === "all"
+    //     ? "https://restcountries.com/v3.1/all"
+    //     : `https://restcountries.com/v3.1/region/${region}`;
+    const url: string = "https://restcountries.com/v3.1/all";
 
     try {
       setIsLoading(true);
@@ -25,7 +25,7 @@ function Home() {
     } finally {
       setIsLoading(!isLoading);
     }
-  }, [region]);
+  }, []);
 
   console.log(countries);
 

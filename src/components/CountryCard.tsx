@@ -1,12 +1,10 @@
-type countryInfo = {
-  countryObject: {
-    area: number;
-    name: { common: string };
-    flags: { svg: string; alt: string };
-  };
-};
+interface CountryInfo {
+  area: number;
+  name: { common: string };
+  flags: { svg: string; alt: string };
+}
 
-function CountryCard({ countryObject }: countryInfo) {
+function CountryCard({ countryObject }: { countryObject: CountryInfo }) {
   return (
     <div className='min-h-[30rem] dark:bg-blue-700 self-center shadow-xl rounded-xl overflow-hidden'>
       <img
