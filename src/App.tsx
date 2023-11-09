@@ -49,7 +49,7 @@ function App() {
   }, [theme]);
 
   return (
-    <div className='min-h-screen font-sans text-sm md:text-lg xl:text-xl'>
+    <div className='min-h-screen font-sans text-sm text-blue-700 md:text-lg xl:text-xl'>
       <Header currTheme={theme} handleThemeChange={changeTheme} />
       <React.StrictMode>
         <RouterProvider router={router} />
