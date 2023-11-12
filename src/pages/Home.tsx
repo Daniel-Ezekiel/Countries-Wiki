@@ -96,9 +96,7 @@ function Home() {
               onChange={(e) => setRegion(e.target.value)}
               className='dark:bg-blue-700 p-3 pr-5 rounded-lg shadow-lg'
             >
-              <option value='all' className='py-4'>
-                Filter by Region
-              </option>
+              <option value='all'>Filter by Region</option>
               <option value='africa'>Africa</option>
               <option value='america'>America</option>
               <option value='asia'>Asia</option>
