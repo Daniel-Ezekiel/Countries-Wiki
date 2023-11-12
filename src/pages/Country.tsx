@@ -64,7 +64,7 @@ function Country() {
           className='p-2 px-4 dark:bg-blue-700 w-fit flex gap-1 items-center rounded-lg shadow-lg'
         >
           <ArrowBackOutlined fontSize='large' />
-          Back
+          Go Home
         </Link>
 
         <section className='w-full mt-6 grid gap-8 lg:grid-cols-2 items-center'>
@@ -75,7 +75,7 @@ function Country() {
               <img
                 src={imgSrc}
                 alt=''
-                className='w-full h-[40rem] shadow-lg rounded-lg'
+                className='w-full shadow-lg rounded-lg object-cover md:h-[40rem]'
               />
             </div>
           )}

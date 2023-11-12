@@ -3,7 +3,7 @@ import CountryCard from "../components/CountryCard";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
 // import { Skeleton } from "@mui/material";
-import { SearchRounded } from "@mui/icons-material";
+import { KeyboardArrowDownRounded, SearchRounded } from "@mui/icons-material";
 
 interface CountryInfo {
   area: number;
@@ -88,20 +88,28 @@ function Home() {
             />
           </div>
 
-          <select
-            name='region'
-            id='region'
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-            className='dark:bg-blue-700 p-3 rounded-lg shadow-lg'
-          >
-            <option value='all'>Filter by Region</option>
-            <option value='africa'>Africa</option>
-            <option value='america'>America</option>
-            <option value='asia'>Asia</option>
-            <option value='europe'>Europe</option>
-            <option value='oceania'>Oceania</option>
-          </select>
+          <div className='relative'>
+            <select
+              name='region'
+              id='region'
+              value={region}
+              onChange={(e) => setRegion(e.target.value)}
+              className='dark:bg-blue-700 p-3 pr-5 rounded-lg shadow-lg'
+            >
+              <option value='all' className='py-4'>
+                Filter by Region
+              </option>
+              <option value='africa'>Africa</option>
+              <option value='america'>America</option>
+              <option value='asia'>Asia</option>
+              <option value='europe'>Europe</option>
+              <option value='oceania'>Oceania</option>
+            </select>
+            <KeyboardArrowDownRounded
+              sx={{ fontSize: 28 }}
+              className='absolute top-1/2 right-[0.2rem] -translate-y-1/2 dark:bg-blue-700 w-8 h-8 appearance-none pointer-events-none'
+            />
+          </div>
         </section>
 
         <section className='w-full grid justify-start gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
