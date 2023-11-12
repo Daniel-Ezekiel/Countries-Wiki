@@ -11,11 +11,14 @@ interface CountryInfo {
 
 function CountryCard({ country }: { country: CountryInfo }) {
   const allCapitals: string = country.capital?.join(", ");
-  // console.log(country.name.common.toLowerCase().includes("nicaragua"));
+  const countryEndpoint: string = country.name.common
+    .toLowerCase()
+    .split(" ")
+    .join("-");
 
   return (
     <div className='min-h-[30rem] dark:bg-blue-700 self-center shadow-xl rounded-xl overflow-hidden'>
-      <Link to={`/${country.name.common}`}>
+      <Link to={`/${countryEndpoint}`}>
         <img
           src={country.flags.svg}
           alt={country.flags.alt}
@@ -24,7 +27,7 @@ function CountryCard({ country }: { country: CountryInfo }) {
       </Link>
 
       <div className='p-4 pb-10 flex flex-col gap-1'>
-        <Link to={`/${country.name.common}`} className='hover:underline'>
+        <Link to={`/${countryEndpoint}`} className='hover:underline'>
           <h3 className='py-2 font-extrabold text-lg'>{country.name.common}</h3>
         </Link>
 

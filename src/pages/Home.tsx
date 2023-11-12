@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import CountryCard from "../components/CountryCard";
+import Skeleton from "../components/Skeleton";
 import axios from "axios";
+// import { Skeleton } from "@mui/material";
 import { SearchRounded } from "@mui/icons-material";
 
 interface CountryInfo {
@@ -18,6 +20,28 @@ function Home() {
   const [searchVal, setSearchVal] = useState("");
   const [region, setRegion] = useState<string>("all");
 
+  const countriesToShow = searchVal
+    ? countries.map((countryInfo, index) =>
+        isLoading ? (
+          <Skeleton key={index} />
+        ) : (
+          <CountryCard key={index} country={countryInfo} />
+        )
+      )
+    : countries
+        .filter((countryInfo: CountryInfo) =>
+          countryInfo.name.common
+            .toLowerCase()
+            .includes(searchVal.toLowerCase())
+        )
+        .map((countryInfo, index) =>
+          isLoading ? (
+            <Skeleton key={index} />
+          ) : (
+            <CountryCard key={index} country={countryInfo} />
+          )
+        );
+
   useEffect(() => {
     let url: string;
 
@@ -29,21 +53,22 @@ function Home() {
       url = "https://restcountries.com/v3.1/all";
     }
     // const url: string = "https://restcountries.com/v3.1/all";
+    const getCountries = async () => {
+      try {
+        if (!isLoading) setIsLoading(true);
 
-    try {
-      setIsLoading(true);
+        await axios.get(url).then((response) => {
+          setCountries(response.data);
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-      axios.get(url).then((response) => {
-        setCountries(response.data);
-      });
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(!isLoading);
-    }
+    getCountries();
   }, [searchVal, region]);
-
-  // console.log(countries);
 
   return (
     <main className='min-h-[90vh] p-4 dark:bg-blue-900 dark:text-white'>
@@ -80,19 +105,7 @@ function Home() {
         </section>
 
         <section className='w-full grid justify-start gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {searchVal
-            ? countries.map((countryInfo, index) => (
-                <CountryCard key={index} country={countryInfo} />
-              ))
-            : countries
-                .filter((countryInfo: CountryInfo) =>
-                  countryInfo.name.common
-                    .toLowerCase()
-                    .includes(searchVal.toLowerCase())
-                )
-                .map((countryInfo, index) => (
-                  <CountryCard key={index} country={countryInfo} />
-                ))}
+          {countriesToShow}
         </section>
       </div>
     </main>
